@@ -40,6 +40,9 @@ class AdfsAuthenticator extends SSPAuthenticator {
             $member->Email =  $attributes["http://schemas.xmlsoap.org/ws/2005/05/identity/claims/emailaddress"][0];
             
             $member->write();
+        } else {
+            $member->FirstName = @end($attributes["http://schemas.xmlsoap.org/ws/2005/05/identity/claims/givenname"]);
+            $member->Surname = @end($attributes["http://schemas.xmlsoap.org/ws/2005/05/identity/claims/surname"]);
         }
         
         return $member;
